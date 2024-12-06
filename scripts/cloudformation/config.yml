@@ -1,0 +1,8 @@
+Resources:
+  ConfigRule:
+    Type: AWS::Config::ConfigRule
+    Properties:
+      ConfigRuleName: TransitGatewayComplianceRule
+      Source:
+        Owner: AWS
+        SourceIdentifier: TRANSIT_GATEWAY_DEFAULT_ROUTE_TABLE_PROPAGATION

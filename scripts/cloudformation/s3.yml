@@ -1,0 +1,10 @@
+Resources:
+  MySecureBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-secure-bucket
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        RestrictPublicBuckets: true
+        IgnorePublicAcls: true

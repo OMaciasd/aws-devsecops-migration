@@ -18,7 +18,7 @@ This project focuses on migrating a legacy DevOps pipeline to a robust DevSecOps
   - [📦 Migrate Jenkins Pipelines to AWS CodePipeline](#-migrate-jenkins-pipelines-to-aws-codepipeline)
   - [🔄 Migration Script](#-migration-script)
   - [⚙️ AWS DevSecOps Pipeline Overview](#️-aws-devsecops-pipeline-overview)
-  - [Fases y Herramientas](#fases-y-herramientas)
+  - [📋 Phases and Tools Comparison](#-phases-and-tools-comparison)
   - [📈 Benefits](#-benefits)
   - [🏗️ Architecture](#️-architecture)
   - [🤝 Contributing](#-contributing)
@@ -40,25 +40,19 @@ This project enables the transition of legacy CI/CD pipelines to a modern DevSec
 
 ### 📂 Project Structure
 
-```plaintext
-.
-├── .github/
-│   ├── workflows/
-│   │   ├── ci-pipeline.yml
-│   │   └── cd-pipeline.yml
-├── docs/
-│   ├── guides/
-│   │   ├── ARCHITECTURE.md
-│   │   └── CONTRIBUTING.md
-├── scripts/
-│   ├── setup_aws_resources.sh
-│   └── migrate_jenkins_to_codepipeline.py
-├── terraform/
-│   ├── main.tf
-│   └── variables.tf
-├── README.md
+  ```plaintext
+  .
+  ├── docs/
+  │   ├── guides/
+  │   │   ├── ARCHITECTURE.md
+  │   │   └── CONTRIBUTING.md
+  │   │   └── bootcamp-devsecops.pdf
+  ├── scripts/
+  │   └── migrate_jenkins_to_codepipeline.py
+  │   ├── setup_aws_resources.sh
+  ├── README.md
 
-```
+  ```
 
 ---
 
@@ -124,16 +118,16 @@ python scripts/migrate_jenkins_to_codepipeline.py
 
 ## ⚙️ AWS DevSecOps Pipeline Overview
 
-## Fases y Herramientas
+## 📋 Phases and Tools Comparison
 
-| Fase                  | Herramientas Legadas           | Herramientas de AWS                                     |
-|-----------------------|--------------------------------|---------------------------------------------------------|
-| **Planificación**     | GitLab                         | AWS IAM                                                 |
-| **Desarrollo**        | SonarQube, GitLab, Snyk, Trivy | Amazon CodeGuru, Amazon Inspector                       |
-| **Integración**       | Jenkins (SonarQube)            | AWS CodePipeline, AWS CodeBuild, Lambda                 |
-| **Despliegue**        | Jenkins                        | AWS CodeDeploy, Elastic Beanstalk, ECS/EKS              |
-| **Operación**         | GitLab, SonarQube, Trivy       | CloudWatch, CloudTrail, Config, Security Hub, GuardDuty |
-| **Retroalimentación** | GitLab                         | CloudWatch Logs, X-Ray, Security Hub                    |
+| Phase           | Legacy                         | AWS                                                            |
+|-----------------|--------------------------------|----------------------------------------------------------------|
+| **Planning**    | GitLab                         | AWS IAM                                                        |
+| **Development** | SonarQube, GitLab, Snyk, Trivy | Amazon CodeGuru, Amazon Inspector                              |
+| **Integration** | Jenkins (SonarQube)            | AWS CodePipeline, AWS CodeBuild, Lambda                        |
+| **Deployment**  | Jenkins                        | AWS CodeDeploy, Elastic Beanstalk, ECS/EKS, AWS CLOUDFORMATION |
+| **Operation**   | GitLab, SonarQube, Trivy       | CloudWatch, CloudTrail, Config, Security Hub, GuardDuty        |
+| **Feedback**    | GitLab                         | CloudWatch Logs, X-Ray, Security Hub                           |
 
 ---
 

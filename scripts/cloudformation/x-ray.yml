@@ -1,0 +1,6 @@
+Resources:
+  XRayGroup:
+    Type: AWS::XRay::Group
+    Properties:
+      GroupName: TransitGatewayMonitoring
+      FilterExpression: "service(\"MyService\")"

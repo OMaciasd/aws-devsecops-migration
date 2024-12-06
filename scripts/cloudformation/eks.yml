@@ -1,0 +1,29 @@
+Resources:
+  EKSCluster:
+    Type: AWS::EKS::Cluster
+    Properties:
+      Name: MyEKSCluster
+      Version: "1.27"
+      RoleArn: arn:aws:iam::<account_id>:role/EKSClusterRole
+      ResourcesVpcConfig:
+        SubnetIds:
+          - subnet-12345abcde
+          - subnet-67890fghij
+        SecurityGroupIds:
+          - sg-abcdefgh
+
+  EKSNodeGroup:
+    Type: AWS::EKS::Nodegroup
+    Properties:
+      ClusterName: !Ref EKSCluster
+      NodeRole: arn:aws:iam::<account_id>:role/EKSNodeRole
+      Subnets:
+        - subnet-12345abcde
+        - subnet-67890fghij
+      ScalingConfig:
+        MinSize: 1
+        MaxSize: 3
+        DesiredSize: 2
+      AmiType: AL2_x86_64
+      InstanceTypes:
+        - t3.medium

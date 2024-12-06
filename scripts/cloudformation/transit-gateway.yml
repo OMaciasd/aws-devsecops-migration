@@ -1,0 +1,10 @@
+Resources:
+  MyTransitGateway:
+    Type: AWS::EC2::TransitGateway
+    Properties:
+      Description: "Transit Gateway for interconnecting VPCs"
+      DefaultRouteTableAssociation: enable
+      DefaultRouteTablePropagation: enable
+      AutoAcceptSharedAttachments: enable
+      DnsSupport: enable
+      VpnEcmpSupport: enable

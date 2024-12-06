@@ -1,0 +1,28 @@
+Resources:
+  WebACL:
+    Type: AWS::WAFv2::WebACL
+    Properties:
+      DefaultAction:
+        Allow: {}
+      Scope: REGIONAL
+      Name: WebACLDemo
+      VisibilityConfig:
+        SampledRequestsEnabled: true
+        CloudWatchMetricsEnabled: true
+        MetricName: WebACLDemo
+      Rules:
+        - Name: BlockSQLInjection
+          Priority: 1
+          Statement:
+            SqliMatchStatement:
+              FieldToMatch:
+                UriPath: {}
+              TextTransformations:
+                - Type: NONE
+                  Priority: 0
+          Action:
+            Block: {}
+          VisibilityConfig:
+            SampledRequestsEnabled: true
+            CloudWatchMetricsEnabled: true
+            MetricName: BlockSQLInjection

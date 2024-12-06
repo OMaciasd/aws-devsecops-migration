@@ -1,0 +1,13 @@
+Resources:
+  SNSTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: TransitGatewayAlerts
+      DisplayName: Transit Gateway Alerts
+
+  SNSSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: your-email@example.com
+      Protocol: email
+      TopicArn: !Ref SNSTopic

@@ -1,0 +1,8 @@
+Resources:
+  CloudTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      TrailName: TransitGatewayTrail
+      S3BucketName: !Ref LoggingBucket
+      IsMultiRegionTrail: true
+      EnableLogFileValidation: true
