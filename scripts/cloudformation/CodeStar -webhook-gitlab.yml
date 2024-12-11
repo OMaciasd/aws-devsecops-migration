@@ -1,0 +1,6 @@
+Resources:
+  GitLabConnection:
+    Type: AWS::CodeStarConnections::Connection
+    Properties:
+      ConnectionName: GitLabConnection
+      ProviderType: GitLab

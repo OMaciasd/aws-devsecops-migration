@@ -1,0 +1,11 @@
+Resources:
+  PipelineArtifactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      LifecycleConfiguration:
+        Rules:
+          - Status: Enabled
+            ExpirationInDays: 30
+            Transitions:
+              - StorageClass: GLACIER
+                TransitionInDays: 15
