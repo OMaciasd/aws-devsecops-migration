@@ -1,0 +1,6 @@
+Resources:
+  MyInstance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t3.micro
+      Tags: []  # Sin etiquetas obligatorias

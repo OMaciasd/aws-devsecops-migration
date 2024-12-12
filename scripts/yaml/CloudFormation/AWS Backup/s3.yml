@@ -1,0 +1,26 @@
+Resources:
+  BackupVault:
+    Type: AWS::Backup::BackupVault
+    Properties:
+      BackupVaultName: MyBackupVault
+
+  BackupPlan:
+    Type: AWS::Backup::BackupPlan
+    Properties:
+      BackupPlan:
+        BackupPlanName: MyBackupPlan
+        BackupPlanRule:
+          - RuleName: DailyBackup
+            TargetBackupVault: !Ref BackupVault
+            ScheduleExpression: cron(0 12 * * ? *) # Respaldo diario a las 12:00 UTC
+            RetainRule:
+              RetainUntilDays: 30
+
+  BackupSelection:
+    Type: AWS::Backup::BackupSelection
+    Properties:
+      BackupPlanId: !Ref BackupPlan
+      BackupSelection:
+        SelectionName: MyBackupResources
+        Resources:
+          - arn:aws:ec2:us-east-1:123456789012:volume/vol-0123456789abcdef0

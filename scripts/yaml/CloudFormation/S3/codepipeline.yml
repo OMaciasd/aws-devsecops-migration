@@ -1,0 +1,38 @@
+Resources:
+  MyPipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      Name: MyPipeline
+      RoleArn: arn:aws:iam::123456789012:role/CodePipelineServiceRole
+      ArtifactStore:
+        Type: S3
+        Location: !Ref PipelineArtifactBucket
+      Stages:
+        - Name: Source
+          Actions:
+            - Name: GitLabSource
+              ActionTypeId:
+                Category: Source
+                Owner: ThirdParty
+                Provider: GitLab
+                Version: "1"
+              Configuration:
+                RepositoryName: my-repo
+                BranchName: main
+                GitLabConnectionArn: arn:aws:codestar-connections:region:account-id:connection/connection-id
+              OutputArtifacts:
+                - Name: SourceOutput
+        - Name: Build
+          Actions:
+            - Name: BuildAction
+              ActionTypeId:
+                Category: Build
+                Owner: AWS
+                Provider: CodeBuild
+                Version: "1"
+              Configuration:
+                ProjectName: my-codebuild-project
+              InputArtifacts:
+                - Name: SourceOutput
+              OutputArtifacts:
+                - Name: BuildOutput
