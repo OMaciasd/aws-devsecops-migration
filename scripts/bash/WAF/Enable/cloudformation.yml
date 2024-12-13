@@ -1,0 +1,29 @@
+Resources:
+  MyRuleGroup:
+    Type: AWS::WAFv2::RuleGroup
+    Properties:
+      Name: MyRuleGroup
+      Scope: REGIONAL # O CLOUDFRONT
+      Capacity: 100 # La cantidad de capacidad asignada al grupo de reglas
+      VisibilityConfig:
+        SampledRequestsEnabled: true
+        CloudWatchMetricsEnabled: true
+        MetricName: MyRuleGroupMetrics
+      Rules:
+      - Name: MyByteMatchRule
+        Action:
+          Allow: {}
+        Priority: 1
+        Statement:
+          ByteMatchStatement:
+            FieldToMatch:
+              UriPath: {}
+            PositionalConstraint: EXACTLY
+            SearchString: "/maliciouspath"
+            TextTransformations:
+            - Priority: 0
+              Type: NONE
+        VisibilityConfig:
+          SampledRequestsEnabled: true
+          CloudWatchMetricsEnabled: true
+          MetricName: MyByteMatchRuleMetrics

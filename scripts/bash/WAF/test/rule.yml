@@ -1,0 +1,14 @@
+Rules:
+  - Name: BlockUserAgents
+    Priority: 1
+    Action:
+      Block: {}
+    Statement:
+      ByteMatchStatement:
+        SearchString: "BadBot"
+        FieldToMatch:
+          SingleHeader:
+            Name: User-Agent
+        TextTransformations:
+          - Priority: 0
+            Type: NONE

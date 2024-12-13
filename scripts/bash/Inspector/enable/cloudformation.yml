@@ -1,0 +1,8 @@
+Resources:
+  InspectorAssessment:
+    Type: AWS::Inspector::AssessmentTemplate
+    Properties:
+      AssessmentTargetArn: !Sub "arn:aws:inspector:${AWS::Region}:${AWS::AccountId}:target/0-xxxxxxxx"
+      DurationInSeconds: 3600
+      RulesPackageArns:
+        - arn:aws:inspector:${AWS::Region}::rulespackage/0-xxxxxxx

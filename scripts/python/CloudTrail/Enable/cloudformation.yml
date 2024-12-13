@@ -1,0 +1,11 @@
+Resources:
+  CloudTrail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      IsLogging: true
+      S3BucketName: !Ref CloudTrailBucket
+
+  CloudTrailBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "cloudtrail-logs-lab"

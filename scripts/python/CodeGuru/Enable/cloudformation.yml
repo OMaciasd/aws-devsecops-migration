@@ -1,0 +1,63 @@
+Resources:
+  PipelineRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Effect: "Allow"
+          Principal:
+            Service: "codepipeline.amazonaws.com"
+          Action: "sts:AssumeRole"
+      Policies:
+      - PolicyName: "CodePipelinePolicy"
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+          - Effect: "Allow"
+            Action:
+            - "codeguru:CreateCodeReview"
+            - "codeguru:DescribeCodeReview"
+            - "codeguru:ListCodeReviews"
+            Resource: "*"
+
+  CodeGuruPipeline:
+    Type: AWS::CodePipeline::Pipeline
+    Properties:
+      RoleArn: !GetAtt PipelineRole.Arn
+      ArtifactStore:
+        Type: S3
+        Location: !Ref ArtifactBucket
+      Stages:
+      - Name: Source
+        Actions:
+        - Name: GetSource
+          ActionTypeId:
+            Category: Source
+            Owner: AWS
+            Provider: GitHub
+            Version: 1
+          Configuration:
+            RepositoryName: your-repo-name
+            BranchName: main
+            OAuthToken: your-github-token
+          OutputArtifacts:
+          - Name: SourceArtifact
+      - Name: CodeAnalysis
+        Actions:
+        - Name: CodeReview
+          ActionTypeId:
+            Category: Test
+            Owner: AWS
+            Provider: CodeGuru
+            Version: 1
+          Configuration:
+            RepositoryName: your-repo-name
+            RepositoryType: GitHub
+          InputArtifacts:
+          - Name: SourceArtifact
+
+  ArtifactBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: "your-pipeline-artifact-bucket"

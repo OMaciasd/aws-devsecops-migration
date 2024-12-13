@@ -1,0 +1,11 @@
+Resources:
+  XRayDaemon:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: "t2.micro"
+      ImageId: "ami-0abcdef1234567890" # Aquí debes colocar tu AMI ID real
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          yum install -y aws-xray-daemon
+          systemctl start xray
